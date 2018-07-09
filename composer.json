@@ -1,0 +1,17 @@
+{
+  "name": "gertvdb/coordinates",
+  "type": "drupal-module",
+  "description": "Provide a standard way to store coordinates",
+  "keywords": ["coordinates"],
+  "homepage": "https://github.com/gertvdb/coordinates",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gert van den Buijs",
+      "email": "gertvandenbuijs@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  }
+}

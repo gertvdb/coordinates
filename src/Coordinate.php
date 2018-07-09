@@ -5,11 +5,9 @@ namespace Drupal\coordinates;
 /**
  * Coordinate.
  *
- * Builds an address object with geocoding information
- * It will use the Geocoder\Model\Address and all unknown methods
- * are passed to this object.
+ * A coordinate object to store coordinates.
  */
-final class Coordinate {
+final class Coordinate implements CoordinateInterface {
 
   /**
    * The latitude.
@@ -83,7 +81,7 @@ final class Coordinate {
   /**
    * Spatial.
    *
-   * @return float|null
+   * @return string|null
    *   The latitude and longitude formatted for spatial search.
    */
   public function getSpatial() {
