@@ -32,6 +32,11 @@ final class Coordinate implements CoordinateInterface {
 
   /**
    * Constructor.
+   *
+   * @param float $latitude
+   *   The latitude of the coordinate.
+   * @param float $longitude
+   *   The longitude of the coordinate.
    */
   public function __construct(float $latitude = NULL, float $longitude = NULL) {
     $this->latitude = $latitude;
@@ -39,50 +44,35 @@ final class Coordinate implements CoordinateInterface {
   }
 
   /**
-   * Longitude.
-   *
-   * @return float|null
-   *   The longitude.
+   * {@inheritdoc}
    */
   public function getLongitude() {
     return $this->longitude ? $this->longitude : NULL;
   }
 
   /**
-   * Latitude.
-   *
-   * @return float|null
-   *   The latitude.
+   * {@inheritdoc}
    */
   public function getLatitude() {
     return $this->latitude ? $this->latitude : NULL;
   }
 
   /**
-   * Set longitude.
-   *
-   * @param float|null $longitude
-   *   The longitude.
+   * {@inheritdoc}
    */
   public function setLongitude($longitude = NULL) {
     $this->longitude = $longitude;
   }
 
   /**
-   * Set latitude.
-   *
-   * @param float|null $latitude
-   *   The longitude.
+   * {@inheritdoc}
    */
   public function setLatitude($latitude = NULL) {
     $this->latitude = $latitude;
   }
 
   /**
-   * Spatial.
-   *
-   * @return string|null
-   *   The latitude and longitude formatted for spatial search.
+   * {@inheritdoc}
    */
   public function getSpatial() {
 

@@ -25,22 +25,14 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
   }
 
   /**
-   * Add a coordinate.
-   *
-   * @param CoordinateInterface $coordinate
-   *   A coordinate object.
+   * {@inheritdoc}
    */
   public function add(CoordinateInterface $coordinate) {
     $this->coordinates[] = $coordinate;
   }
 
   /**
-   * Set a coordinate in collection.
-   *
-   * @param int $key
-   *   A numeric key.
-   * @param CoordinateInterface $coordinate
-   *   A coordinate object.
+   * {@inheritdoc}
    */
   public function set($key, CoordinateInterface $coordinate) {
     if (isset($this->coordinates[$key])) {
@@ -49,20 +41,14 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
   }
 
   /**
-   * Get the coordinates collection.
-   *
-   * @return \Drupal\coordinates\Coordinate[]
-   *   The collection array.
+   * {@inheritdoc}
    */
   public function getCollection() {
     return $this->coordinates ? $this->coordinates : [];
   }
 
   /**
-   * Set the coordinates collection.
-   *
-   * @param \Drupal\coordinates\Coordinate[] $collection
-   *   The collection array.
+   * {@inheritdoc}
    */
   public function setCollection(array $collection) {
     $this->coordinates = $collection;
