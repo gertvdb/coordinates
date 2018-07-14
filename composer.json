@@ -12,6 +12,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "gertvdb/distance" : "^1.0"
   }
 }
