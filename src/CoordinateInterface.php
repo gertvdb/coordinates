@@ -24,22 +24,6 @@ interface CoordinateInterface {
   public function getLatitude();
 
   /**
-   * Set longitude.
-   *
-   * @param float|null $longitude
-   *   The longitude.
-   */
-  public function setLongitude($longitude = NULL);
-
-  /**
-   * Set latitude.
-   *
-   * @param float|null $latitude
-   *   The longitude.
-   */
-  public function setLatitude($latitude = NULL);
-
-  /**
    * Spatial.
    *
    * @return float|null

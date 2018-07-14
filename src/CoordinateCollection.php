@@ -5,7 +5,7 @@ namespace Drupal\coordinates;
 /**
  * CoordinateCollection.
  */
-final class CoordinateCollection implements CoordinateCollectionInterface {
+final class CoordinateCollection implements CoordinateCollectionInterface, \IteratorAggregate {
 
   /**
    * The coordinates.
@@ -27,6 +27,13 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
   /**
    * {@inheritdoc}
    */
+  public function count() {
+    return count($this->coordinates);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function add(CoordinateInterface $coordinate) {
     $this->coordinates[] = $coordinate;
   }
@@ -34,7 +41,7 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
   /**
    * {@inheritdoc}
    */
-  public function set($key, CoordinateInterface $coordinate) {
+  public function override($key, CoordinateInterface $coordinate) {
     if (isset($this->coordinates[$key])) {
       $this->coordinates[$key] = $coordinate;
     }
@@ -52,6 +59,13 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
    */
   public function setCollection(array $collection) {
     $this->coordinates = $collection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getIterator() {
+    return new \ArrayIterator($this->coordinates);
   }
 
 }

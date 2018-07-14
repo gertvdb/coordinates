@@ -8,7 +8,15 @@ namespace Drupal\coordinates;
 interface CoordinateCollectionInterface {
 
   /**
-   * Add a coordinate.
+   * Count the collection.
+   *
+   * @return int
+   *   The count of the coordinates in the collection.
+   */
+  public function count();
+
+  /**
+   * Add a coordinate to the collection.
    *
    * @param CoordinateInterface $coordinate
    *   A coordinate object.
@@ -16,14 +24,14 @@ interface CoordinateCollectionInterface {
   public function add(CoordinateInterface $coordinate);
 
   /**
-   * Update a coordinate in collection.
+   * Override a coordinate in collection.
    *
    * @param int $key
    *   A numeric key.
    * @param CoordinateInterface $coordinate
    *   A coordinate object.
    */
-  public function update($key, CoordinateInterface $coordinate);
+  public function override($key, CoordinateInterface $coordinate);
 
   /**
    * Get the coordinates collection.
