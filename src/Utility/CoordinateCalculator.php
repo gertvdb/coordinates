@@ -26,7 +26,7 @@ class CoordinateCalculator {
    * @return \Drupal\distance\Distance
    *   A distance object.
    */
-  public static function calculateCoordinateDistance(CoordinateInterface $coordinate_1 = NULL, CoordinateInterface $coordinate_2 = NULL) {
+  public static function calculateDistance(CoordinateInterface $coordinate_1 = NULL, CoordinateInterface $coordinate_2 = NULL) {
 
     // Get theta for calculations.
     $theta = $coordinate_1->getLongitude() - $coordinate_2->getLongitude();
@@ -47,7 +47,7 @@ class CoordinateCalculator {
    * @param \Drupal\coordinates\CoordinateCollectionInterface|null $coordinate_collection
    *   The coordinate collection object.
    */
-  public static function calculateCoordinateCollectionDistance(CoordinateCollectionInterface $coordinate_collection = NULL) {
+  public static function calculateCollectionDistance(CoordinateCollectionInterface $coordinate_collection = NULL) {
 
     // Prepare an array of distances.
     $distances = [];
