@@ -12,23 +12,23 @@ final class Coordinate implements CoordinateInterface {
   /**
    * The latitude.
    *
-   * @var float|null
+   * @var float
    */
   protected $latitude;
 
   /**
    * The longitude.
    *
-   * @var float|null
+   * @var float
    */
   protected $longitude;
 
   /**
    * The latitude and longitude for spatial searches.
    *
-   * @var string|null
+   * @var string
    */
-  protected $spatial;
+  private $spatial;
 
   /**
    * Constructor.
@@ -38,9 +38,10 @@ final class Coordinate implements CoordinateInterface {
    * @param float $longitude
    *   The longitude of the coordinate.
    */
-  public function __construct(float $latitude = NULL, float $longitude = NULL) {
+  public function __construct(float $latitude, float $longitude) {
     $this->latitude = $latitude;
     $this->longitude = $longitude;
+    $this->spatial = $this->getSpatial();
   }
 
   /**
@@ -60,28 +61,28 @@ final class Coordinate implements CoordinateInterface {
   /**
    * {@inheritdoc}
    */
-  public function setLongitude($longitude = NULL) {
+  public function getSpatial() {
+    return $this->getLatitude() . ',' . $this->getLongitude();
+  }
+
+  /**
+   * Set the longitude value.
+   *
+   * @param float $longitude
+   *   The new longitude value.
+   */
+  public function setLongitude(float $longitude) {
     $this->longitude = $longitude;
   }
 
   /**
-   * {@inheritdoc}
+   * Set the latitude value.
+   *
+   * @param float $latitude
+   *   The new latitude value.
    */
-  public function setLatitude($latitude = NULL) {
+  public function setLatitude(float $latitude) {
     $this->latitude = $latitude;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getSpatial() {
-
-    // Check for valid coordinates.
-    if (!$this->getLatitude() || !$this->getLongitude()) {
-      return NULL;
-    }
-
-    return $this->getLatitude() . ',' . $this->getLongitude();
   }
 
 }
