@@ -5,19 +5,19 @@ namespace Drupal\coordinates;
 /**
  * CoordinateCollection.
  */
-final class CoordinateCollection implements CoordinateCollectionInterface, \IteratorAggregate {
+final class CoordinateCollection implements CoordinateCollectionInterface {
 
   /**
    * The coordinates.
    *
-   * @var \Drupal\coordinates\Coordinate[]|array
+   * @var \Drupal\coordinates\CoordinateInterface[]|array
    */
   protected $coordinates;
 
   /**
    * Constructor.
    *
-   * @param \Drupal\coordinates\Coordinate[]|array $coordinates
+   * @param \Drupal\coordinates\CoordinateInterface[]|array $coordinates
    *   An array of coordinates.
    */
   public function __construct(array $coordinates = array()) {
@@ -52,13 +52,6 @@ final class CoordinateCollection implements CoordinateCollectionInterface, \Iter
    */
   public function getCollection() {
     return $this->coordinates ? $this->coordinates : [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setCollection(array $collection) {
-    $this->coordinates = $collection;
   }
 
   /**
