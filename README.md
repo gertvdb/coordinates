@@ -19,20 +19,8 @@ $coordinate_collection = new CoordinateCollection([$coordinate_1, $coordinate_2]
 
 ```
 
-Using the utility class.
-
-```
-
-use Drupal\coordinates\Utility\CoordinateCalculator;
-
-$distance = CoordinateCalculator::calculateDistance($coordinate_1, $coordinate_2);
-$distances = CoordinateCalculator::calculateCollectionDistance($coordinate_collection);
-
-```
-
 # Release notes #
 
 `1.0.0`
 * Basic setup of the module.
 * Provide coordinates and coordinates collection class.
-* Provide utility class for calculations.

@@ -31,4 +31,13 @@ interface CoordinateInterface {
    */
   public function getSpatial();
 
+  /**
+   * To Array.
+   *
+   * @return array|null
+   *   The latitude and longitude formatted as a keyed array.
+   *   Array keys : 'latitude', 'longitude'
+   */
+  public function toArray();
+
 }
