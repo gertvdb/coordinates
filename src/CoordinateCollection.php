@@ -5,7 +5,7 @@ namespace Drupal\coordinates;
 /**
  * CoordinateCollection.
  */
-final class CoordinateCollection implements CoordinateCollectionInterface {
+class CoordinateCollection implements CoordinateCollectionInterface {
 
   /**
    * The coordinates.

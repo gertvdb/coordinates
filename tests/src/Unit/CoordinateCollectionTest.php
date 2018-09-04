@@ -64,4 +64,25 @@ class CoordinateCollectionTest extends UnitTestCase {
     $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
   }
 
+  /**
+   * Test the iterator function.
+   */
+  public function testIterator() {
+    $coordinates = [];
+    $coordinates[] = new Coordinate(37.419857, -12.078827);
+    $coordinates[] = new Coordinate(32.450023, -122.078827);
+    $coordinates[] = new Coordinate(12.900093, 13.953000);
+    $coordinates[] = new Coordinate(89.452827, 14.894999);
+    $coordinateCollection = new CoordinateCollection($coordinates);
+
+    $count = 0;
+    foreach ($coordinateCollection->getIterator() as $item) {
+      $this->assertEquals($item, $coordinates[$count]);
+      $count++;
+    }
+
+    $this->assertEquals($coordinateCollection->count(), $count);
+
+  }
+
 }
