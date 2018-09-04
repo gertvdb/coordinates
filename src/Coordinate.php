@@ -63,7 +63,7 @@ final class Coordinate implements CoordinateInterface {
   /**
    * {@inheritdoc}
    */
-  public function getSpatial() {
+  public function toSpatial() {
     return $this->getLatitude() . ',' . $this->getLongitude();
   }
 

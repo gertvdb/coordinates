@@ -23,4 +23,15 @@ class CoordinateTest extends UnitTestCase {
     $this->assertEquals($coodinate->toArray(), ['latitude' => $latitude, 'longitude' => $longitude]);
   }
 
+  /**
+   * Test the to spatial function.
+   */
+  public function testToSpatial() {
+    $latitude = 37.419857;
+    $longitude = -122.078827;
+
+    $coodinate = new Coordinate($latitude, $longitude);
+    $this->assertEquals($coodinate->toSpatial(), $latitude . ',' . $longitude);
+  }
+
 }

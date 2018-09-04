@@ -29,7 +29,7 @@ interface CoordinateInterface {
    * @return float|null
    *   The latitude and longitude formatted for spatial search.
    */
-  public function getSpatial();
+  public function toSpatial();
 
   /**
    * To Array.
