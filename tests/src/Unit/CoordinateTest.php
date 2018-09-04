@@ -20,7 +20,7 @@ class CoordinateTest extends UnitTestCase {
     $longitude = -122.078827;
 
     $coodinate = new Coordinate($latitude, $longitude);
-    $this->assertEquals($coodinate->toArray(), ['latitude' => $latitude, 'longitude' => $longitude]);
+    $this->assertEquals($coodinate->toArray(), ['latitude' => $coodinate->getLatitude(), 'longitude' => $coodinate->getLongitude()]);
   }
 
   /**

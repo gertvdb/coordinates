@@ -25,7 +25,7 @@ class CoordinateCollectionTest extends UnitTestCase {
     $coordinateCollection = new CoordinateCollection($coordinates);
 
     $this->assertEquals($coordinateCollection->count(), 4);
-
+    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
   }
 
   /**
@@ -61,6 +61,7 @@ class CoordinateCollectionTest extends UnitTestCase {
 
     $coordinateCollection->override(4, $overrideCoordinate);
     $this->assertEquals($coordinateCollection->count(), 4);
+    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
   }
 
 }
