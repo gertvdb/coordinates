@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Drupal\coordinates\Formatter;
 
 use Drupal\coordinates\CoordinateInterface;

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Drupal\coordinates_field\Plugin\Field\FieldWidget;
 
 use Drupal\coordinates\CoordinateInterface;
