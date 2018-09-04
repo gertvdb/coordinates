@@ -21,6 +21,6 @@ interface CoordinateFormatterInterface {
    *   The format consisting of only valid literals.
    *   Other items will be removed.
    */
-  public function format(CoordinateInterface $coordinates, string $format);
+  public function format(CoordinateInterface $coordinates, $format);
 
 }

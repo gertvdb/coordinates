@@ -12,7 +12,7 @@ class CoordinateFormatter implements CoordinateFormatterInterface {
   /**
    * {@inheritdoc}
    */
-  public function format(CoordinateInterface $coordinates, string $format) {
+  public function format(CoordinateInterface $coordinates, $format) {
     $replace = [
       self::LATITUDE_LITERAL => $coordinates->getLatitude(),
       self::LONGITUDE_LITERAL => $coordinates->getLongitude(),
