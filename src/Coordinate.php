@@ -9,7 +9,7 @@ use Drupal\coordinates\Utility\CoordinateValidator;
  *
  * A coordinate object to store coordinates.
  */
-final class Coordinate implements CoordinateInterface {
+class Coordinate implements CoordinateInterface {
 
   /**
    * The latitude.
@@ -56,6 +56,9 @@ final class Coordinate implements CoordinateInterface {
    * {@inheritdoc}
    */
   public function toSpatial() {
+    if (!$this->getLatitude() || !$this->getLongitude()) {
+      return NULL;
+    }
     return $this->getLatitude() . ',' . $this->getLongitude();
   }
 
@@ -75,7 +78,7 @@ final class Coordinate implements CoordinateInterface {
    * @param float $longitude
    *   The new longitude value.
    */
-  public function setLongitude($longitude) {
+  private function setLongitude($longitude) {
 
     if (!CoordinateValidator::isValidLongitude($longitude)) {
       throw new \Exception('The provide longitude is invalid.');
@@ -90,7 +93,7 @@ final class Coordinate implements CoordinateInterface {
    * @param float $latitude
    *   The new latitude value.
    */
-  public function setLatitude($latitude) {
+  private function setLatitude($latitude) {
 
     if (!CoordinateValidator::isValidLatitude($latitude)) {
       throw new \Exception('The provide latitude is invalid.');
