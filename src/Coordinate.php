@@ -16,14 +16,14 @@ final class Coordinate implements CoordinateInterface {
   /**
    * The latitude.
    *
-   * @var double
+   * @var float
    */
   protected $latitude;
 
   /**
    * The longitude.
    *
-   * @var double
+   * @var float
    */
   protected $longitude;
 
@@ -37,12 +37,12 @@ final class Coordinate implements CoordinateInterface {
   /**
    * Constructor.
    *
-   * @param double $latitude
+   * @param float $latitude
    *   The latitude of the coordinate.
-   * @param double $longitude
+   * @param float $longitude
    *   The longitude of the coordinate.
    */
-  public function __construct(double $latitude, double $longitude) {
+  public function __construct(float $latitude, float $longitude) {
     $this->setLatitude($latitude);
     $this->setLongitude($longitude);
     $this->spatial = $this->getSpatial();
@@ -82,10 +82,10 @@ final class Coordinate implements CoordinateInterface {
   /**
    * Set the longitude value.
    *
-   * @param double $longitude
+   * @param float $longitude
    *   The new longitude value.
    */
-  public function setLongitude(double $longitude) {
+  public function setLongitude(float $longitude) {
 
     if (!CoordinateValidator::isValidLongitude($longitude)) {
       throw new \Exception('The provide longitude is invalid.');
@@ -97,10 +97,10 @@ final class Coordinate implements CoordinateInterface {
   /**
    * Set the latitude value.
    *
-   * @param double $latitude
+   * @param float $latitude
    *   The new latitude value.
    */
-  public function setLatitude(double $latitude) {
+  public function setLatitude(float $latitude) {
 
     if (!CoordinateValidator::isValidLatitude($latitude)) {
       throw new \Exception('The provide latitude is invalid.');

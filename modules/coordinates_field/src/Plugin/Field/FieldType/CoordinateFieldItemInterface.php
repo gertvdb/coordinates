@@ -16,7 +16,7 @@ interface CoordinateFieldItemInterface extends FieldItemInterface {
   /**
    * Get the latitude.
    *
-   * @return double|null
+   * @return float|null
    *   A latitude.
    */
   public function getLatitude();
@@ -24,7 +24,7 @@ interface CoordinateFieldItemInterface extends FieldItemInterface {
   /**
    * Get the longitude.
    *
-   * @return double|null
+   * @return float|null
    *   A longitude.
    */
   public function getLongitude();

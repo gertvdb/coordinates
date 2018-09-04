@@ -25,7 +25,7 @@ class CoordinateValidator {
       return FALSE;
     }
 
-    // Check whether value passed is double.
+    // Check whether value passed is float.
     if (!is_float($latitude)) {
       return FALSE;
     }
@@ -50,7 +50,7 @@ class CoordinateValidator {
       return FALSE;
     }
 
-    // Check whether value passed is double.
+    // Check whether value passed is float.
     if (!is_float($longitude)) {
       return FALSE;
     }
