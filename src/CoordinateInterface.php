@@ -10,7 +10,7 @@ interface CoordinateInterface {
   /**
    * Longitude.
    *
-   * @return float|null
+   * @return double|null
    *   The longitude.
    */
   public function getLongitude();
@@ -18,7 +18,7 @@ interface CoordinateInterface {
   /**
    * Latitude.
    *
-   * @return float|null
+   * @return double|null
    *   The latitude.
    */
   public function getLatitude();
@@ -26,7 +26,7 @@ interface CoordinateInterface {
   /**
    * Spatial.
    *
-   * @return float|null
+   * @return double|null
    *   The latitude and longitude formatted for spatial search.
    */
   public function getSpatial();
