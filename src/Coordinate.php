@@ -2,6 +2,8 @@
 
 namespace Drupal\coordinates;
 
+use Drupal\coordinates\Utility\CoordinateValidator;
+
 /**
  * Coordinate.
  *
@@ -39,8 +41,8 @@ final class Coordinate implements CoordinateInterface {
    *   The longitude of the coordinate.
    */
   public function __construct(float $latitude, float $longitude) {
-    $this->latitude = $latitude;
-    $this->longitude = $longitude;
+    $this->setLatitude($latitude);
+    $this->setLongitude($longitude);
     $this->spatial = $this->getSpatial();
   }
 
@@ -66,12 +68,27 @@ final class Coordinate implements CoordinateInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function toArray() {
+    return [
+      'latitude' => $this->getLatitude(),
+      'longitude' => $this->getLongitude(),
+    ];
+  }
+
+  /**
    * Set the longitude value.
    *
    * @param float $longitude
    *   The new longitude value.
    */
   public function setLongitude(float $longitude) {
+
+    if (!CoordinateValidator::isValidLongitude($longitude)) {
+      throw new \Exception('The provide longitude is invalid.');
+    }
+
     $this->longitude = $longitude;
   }
 
@@ -82,6 +99,11 @@ final class Coordinate implements CoordinateInterface {
    *   The new latitude value.
    */
   public function setLatitude(float $latitude) {
+
+    if (!CoordinateValidator::isValidLatitude($latitude)) {
+      throw new \Exception('The provide latitude is invalid.');
+    }
+
     $this->latitude = $latitude;
   }
 

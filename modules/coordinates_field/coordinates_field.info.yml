@@ -1,0 +1,7 @@
+name: Coordinates Field
+description: Provide a coordinates field
+package: Field types
+type: module
+core: 8.x
+dependencies:
+  - coordinates

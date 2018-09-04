@@ -20,7 +20,7 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
    * @param \Drupal\coordinates\CoordinateInterface[]|array $coordinates
    *   An array of coordinates.
    */
-  public function __construct(array $coordinates = array()) {
+  public function __construct(array $coordinates = []) {
     $this->coordinates = $coordinates;
   }
 
