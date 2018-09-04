@@ -1,7 +1,6 @@
 # coordinates #
 
 Provide a standard way to store coordinates and coordinate collections.
-The module also provide a utility class for calculations with coordinates.
 
 # Usage #
 
@@ -18,9 +17,3 @@ $coordinate_2 = new Coordinate(52.392404, 4.467884));
 $coordinate_collection = new CoordinateCollection([$coordinate_1, $coordinate_2]);
 
 ```
-
-# Release notes #
-
-`1.0.0`
-* Basic setup of the module.
-* Provide coordinates and coordinates collection class.
