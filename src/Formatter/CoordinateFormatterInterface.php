@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\coordinates\Formatter;
 
 use Drupal\coordinates\CoordinateInterface;
@@ -21,6 +23,6 @@ interface CoordinateFormatterInterface {
    *   The format consisting of only valid literals.
    *   Other items will be removed.
    */
-  public function format(CoordinateInterface $coordinates, $format);
+  public function format(CoordinateInterface $coordinates, string $format);
 
 }

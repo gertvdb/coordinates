@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\coordinates_field\Plugin\Field\FieldType;
 
 use Drupal\coordinates\CoordinateCollection;

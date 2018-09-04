@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\coordinates\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;

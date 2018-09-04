@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\coordinates\Formatter;
 
 use Drupal\coordinates\CoordinateInterface;
@@ -12,7 +14,7 @@ class CoordinateFormatter implements CoordinateFormatterInterface {
   /**
    * {@inheritdoc}
    */
-  public function format(CoordinateInterface $coordinates, $format) {
+  public function format(CoordinateInterface $coordinates, string $format) {
     $replace = [
       self::LATITUDE_LITERAL => $coordinates->getLatitude(),
       self::LONGITUDE_LITERAL => $coordinates->getLongitude(),
