@@ -23,9 +23,9 @@ class CoordinateFormatterTest extends UnitTestCase {
     $coodinate = new Coordinate($latitude, $longitude);
     $coodinateFormatter = new CoordinateFormatter();
 
-    $this->assertEquals($coodinateFormatter->format($coodinate, '%lat - %lon'), $latitude . ' - ' . $longitude);
-    $this->assertEquals($coodinateFormatter->format($coodinate, 'lat: %lat, lon: %lon'), 'lat: ' . $latitude . ', lon: ' . $longitude);
-    $this->assertEquals($coodinateFormatter->format($coodinate, '%lon %lat'), $longitude . ' ' . $latitude);
+    $this->assertEquals($coodinateFormatter->format($coodinate, '%lat - %lng'), $latitude . ' - ' . $longitude);
+    $this->assertEquals($coodinateFormatter->format($coodinate, 'lat: %lat, lon: %lng'), 'lat: ' . $latitude . ', lon: ' . $longitude);
+    $this->assertEquals($coodinateFormatter->format($coodinate, '%lng %lat'), $longitude . ' ' . $latitude);
   }
 
 }
