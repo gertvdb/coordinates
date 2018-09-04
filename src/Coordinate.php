@@ -26,13 +26,6 @@ final class Coordinate implements CoordinateInterface {
   protected $longitude;
 
   /**
-   * The latitude and longitude for spatial searches.
-   *
-   * @var string
-   */
-  private $spatial;
-
-  /**
    * Constructor.
    *
    * @param float $latitude
@@ -43,7 +36,6 @@ final class Coordinate implements CoordinateInterface {
   public function __construct($latitude, $longitude) {
     $this->setLatitude($latitude);
     $this->setLongitude($longitude);
-    $this->spatial = $this->getSpatial();
   }
 
   /**
