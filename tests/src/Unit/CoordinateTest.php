@@ -34,4 +34,28 @@ class CoordinateTest extends UnitTestCase {
     $this->assertEquals($coodinate->toSpatial(), $latitude . ',' . $longitude);
   }
 
+  /**
+   * Test invalid latitude.
+   *
+   * @expectedException \Exception
+   */
+  public function testInvalidLatitude() {
+    $latitude = 'invalid';
+    $longitude = -122.078827;
+
+    new Coordinate($latitude, $longitude);
+  }
+
+  /**
+   * Test invalid longitude.
+   *
+   * @expectedException \Exception
+   */
+  public function testInvalidLongitude() {
+    $latitude = 37.419857;
+    $longitude = 'invalid';
+
+    new Coordinate($latitude, $longitude);
+  }
+
 }
