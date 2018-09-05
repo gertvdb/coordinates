@@ -42,6 +42,7 @@ class CoordinateCollectionTest extends UnitTestCase {
     $addCoordinate = new Coordinate(89.452827, 14.894999);
 
     $coordinateCollection->add($addCoordinate);
+    $this->assertArrayEquals($coordinateCollection->getCollection(), array_merge($coordinates, [$addCoordinate]));
     $this->assertEquals($coordinateCollection->count(), 5);
   }
 
@@ -57,8 +58,10 @@ class CoordinateCollectionTest extends UnitTestCase {
     $coordinateCollection = new CoordinateCollection($coordinates);
 
     $overrideCoordinate = new Coordinate(89.452827, 14.894999);
+    $coordinateCollection->override(2, $overrideCoordinate);
 
-    $coordinateCollection->override(4, $overrideCoordinate);
+    $coordinates[2] = $overrideCoordinate;
+    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
     $this->assertEquals($coordinateCollection->count(), 4);
   }
 
@@ -80,7 +83,6 @@ class CoordinateCollectionTest extends UnitTestCase {
     }
 
     $this->assertEquals($coordinateCollection->count(), $count);
-
   }
 
   /**
@@ -96,6 +98,25 @@ class CoordinateCollectionTest extends UnitTestCase {
 
     $this->assertInstanceOf('\Drupal\coordinates\CoordinateCollection', $coordinateCollection);
     $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
+  }
+
+  /**
+   * Test coordinate.
+   */
+  public function testPrepareCoordinateCollection() {
+    $coordinates = [];
+    $coordinates[] = new Coordinate(37.419857, -12.078827);
+    $coordinates[] = new Coordinate(32.450023, -122.078827);
+    $coordinates[] = [0 => 'Invalid'];
+    $coordinates[] = new Coordinate(89.452827, 14.894999);
+    $coordinateCollection = new CoordinateCollection($coordinates);
+
+    unset($coordinates[2]);
+    $coordinates = array_values($coordinates);
+
+    $this->assertInstanceOf('\Drupal\coordinates\CoordinateCollection', $coordinateCollection);
+    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
+    $this->assertEquals($coordinateCollection->count(), 3);
   }
 
 }

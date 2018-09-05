@@ -2,6 +2,8 @@
 
 namespace Drupal\coordinates;
 
+use Drupal\coordinates\CoordinateInterface;
+
 /**
  * CoordinateCollection.
  */
@@ -21,7 +23,7 @@ class CoordinateCollection implements CoordinateCollectionInterface {
    *   An array of coordinates.
    */
   public function __construct(array $coordinates = []) {
-    $this->coordinates = $coordinates;
+    $this->coordinates = $this->prepareCollection($coordinates);
   }
 
   /**
@@ -59,6 +61,19 @@ class CoordinateCollection implements CoordinateCollectionInterface {
    */
   public function getIterator() {
     return new \ArrayIterator($this->coordinates);
+  }
+
+  /**
+   * Filter out all items that aren't valid coordinates.
+   */
+  protected function prepareCollection(array $coordinates = []) {
+    $preparedCollection = [];
+    foreach ($coordinates as $coordinate) {
+      if ($coordinate instanceof CoordinateInterface) {
+        $preparedCollection[] = $coordinate;
+      }
+    }
+    return $preparedCollection;
   }
 
 }
