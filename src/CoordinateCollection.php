@@ -51,7 +51,7 @@ class CoordinateCollection implements CoordinateCollectionInterface {
    * {@inheritdoc}
    */
   public function getCollection() {
-    return $this->coordinates ? $this->coordinates : [];
+    return $this->coordinates;
   }
 
   /**
