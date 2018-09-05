@@ -63,20 +63,6 @@ class CoordinateCollectionTest extends UnitTestCase {
   }
 
   /**
-   * Test the get collection function.
-   */
-  public function testGetCollection() {
-    $coordinates = [];
-    $coordinates[] = new Coordinate(37.419857, -12.078827);
-    $coordinates[] = new Coordinate(32.450023, -122.078827);
-    $coordinates[] = new Coordinate(12.900093, 13.953000);
-    $coordinates[] = new Coordinate(89.452827, 14.894999);
-    $coordinateCollection = new CoordinateCollection($coordinates);
-
-    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
-  }
-
-  /**
    * Test the iterator function.
    */
   public function testIterator() {
@@ -95,6 +81,21 @@ class CoordinateCollectionTest extends UnitTestCase {
 
     $this->assertEquals($coordinateCollection->count(), $count);
 
+  }
+
+  /**
+   * Test coordinate.
+   */
+  public function testCoordinateCollection() {
+    $coordinates = [];
+    $coordinates[] = new Coordinate(37.419857, -12.078827);
+    $coordinates[] = new Coordinate(32.450023, -122.078827);
+    $coordinates[] = new Coordinate(12.900093, 13.953000);
+    $coordinates[] = new Coordinate(89.452827, 14.894999);
+    $coordinateCollection = new CoordinateCollection($coordinates);
+
+    $this->assertInstanceOf('\Drupal\coordinates\CoordinateCollection', $coordinateCollection);
+    $this->assertArrayEquals($coordinateCollection->getCollection(), $coordinates);
   }
 
 }
