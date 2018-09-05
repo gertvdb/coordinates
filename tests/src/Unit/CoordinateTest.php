@@ -37,7 +37,7 @@ class CoordinateTest extends UnitTestCase {
   /**
    * Test invalid latitude.
    *
-   * @expectedException \Exception
+   * @expectedException \InvalidArgumentException
    */
   public function testInvalidLatitude() {
     $latitude = 'invalid';
@@ -49,13 +49,26 @@ class CoordinateTest extends UnitTestCase {
   /**
    * Test invalid longitude.
    *
-   * @expectedException \Exception
+   * @expectedException \InvalidArgumentException
    */
   public function testInvalidLongitude() {
     $latitude = 37.419857;
     $longitude = 'invalid';
 
     new Coordinate($latitude, $longitude);
+  }
+
+  /**
+   * Test coordinate.
+   */
+  public function testCoordinate() {
+    $latitude = 37.419857;
+    $longitude = -122.078827;
+
+    $coordinate = new Coordinate($latitude, $longitude);
+    $this->assertInstanceOf('\Drupal\coordinates\Coordinate', $coordinate);
+    $this->assertEquals($coordinate->getLatitude(), $latitude);
+    $this->assertEquals($coordinate->getLongitude(), $longitude);
   }
 
 }

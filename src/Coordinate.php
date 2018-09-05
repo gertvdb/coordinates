@@ -42,23 +42,20 @@ class Coordinate implements CoordinateInterface {
    * {@inheritdoc}
    */
   public function getLongitude() {
-    return $this->longitude ? $this->longitude : NULL;
+    return $this->longitude;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getLatitude() {
-    return $this->latitude ? $this->latitude : NULL;
+    return $this->latitude;
   }
 
   /**
    * {@inheritdoc}
    */
   public function toSpatial() {
-    if (!$this->getLatitude() || !$this->getLongitude()) {
-      return NULL;
-    }
     return $this->getLatitude() . ',' . $this->getLongitude();
   }
 
@@ -81,7 +78,7 @@ class Coordinate implements CoordinateInterface {
   private function setLongitude($longitude) {
 
     if (!CoordinateValidator::isValidLongitude($longitude)) {
-      throw new \Exception('The provide longitude is invalid.');
+      throw new \InvalidArgumentException('The provide longitude is invalid.');
     }
 
     $this->longitude = $longitude;
@@ -96,7 +93,7 @@ class Coordinate implements CoordinateInterface {
   private function setLatitude($latitude) {
 
     if (!CoordinateValidator::isValidLatitude($latitude)) {
-      throw new \Exception('The provide latitude is invalid.');
+      throw new \InvalidArgumentException('The provide latitude is invalid.');
     }
 
     $this->latitude = $latitude;
