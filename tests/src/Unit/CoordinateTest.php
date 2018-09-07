@@ -8,6 +8,8 @@ use Drupal\coordinates\Coordinate;
 /**
  * Class CoordinateTest.
  *
+ * @coversDefaultClass \Drupal\coordinates\Coordinate
+ *
  * @group coordinates
  */
 class CoordinateTest extends UnitTestCase {

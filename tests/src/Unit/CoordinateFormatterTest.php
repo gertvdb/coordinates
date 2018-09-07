@@ -9,6 +9,8 @@ use Drupal\coordinates\Formatter\CoordinateFormatter;
 /**
  * Class CoordinateFormatterTest.
  *
+ * @coversDefaultClass \Drupal\coordinates\Formatter\CoordinateFormatter
+ *
  * @group coordinates
  */
 class CoordinateFormatterTest extends UnitTestCase {

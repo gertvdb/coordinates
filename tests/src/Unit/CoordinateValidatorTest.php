@@ -8,6 +8,8 @@ use Drupal\coordinates\Utility\CoordinateValidator;
 /**
  * Class CoordinateValidatorTest.
  *
+ * @coversDefaultClass \Drupal\coordinates\Utility\CoordinateValidator
+ *
  * @group coordinates
  */
 class CoordinateValidatorTest extends UnitTestCase {

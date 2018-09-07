@@ -9,6 +9,8 @@ use Drupal\coordinates\CoordinateCollection;
 /**
  * Class CoordinateCollectionTest.
  *
+ * @coversDefaultClass \Drupal\coordinates\CoordinateCollection
+ *
  * @group coordinates
  */
 class CoordinateCollectionTest extends UnitTestCase {
