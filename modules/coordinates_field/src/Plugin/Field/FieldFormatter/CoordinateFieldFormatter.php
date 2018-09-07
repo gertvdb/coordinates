@@ -5,6 +5,7 @@ namespace Drupal\coordinates_field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\coordinates\Formatter\CoordinateFormatter;
+use Drupal\coordinates\CoordinateInterface;
 
 /**
  * Default formatter for coordinates.
@@ -25,11 +26,12 @@ class CoordinateFieldFormatter extends FormatterBase {
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
     foreach ($items as $delta => $item) {
-      if (!empty($item->value)) {
+      if ($item->value && $item->value instanceof CoordinateInterface) {
+
         /** @var \Drupal\coordinates\CoordinateInterface $coordinate */
         $coordinate = $item->value;
         $coordinateFormatter = new CoordinateFormatter();
-        $elements[$delta] = $coordinateFormatter->format($coordinate, '%lat - %lon');
+        $elements[$delta] = $coordinateFormatter->format($coordinate, '%lat, %lng');
       }
     }
 

@@ -25,11 +25,6 @@ class CoordinateValidator {
       return FALSE;
     }
 
-    // Check whether value passed is float.
-    if (!is_float($latitude)) {
-      return FALSE;
-    }
-
     // Check whether value passed is valid latitude.
     return preg_match('/^(\+|-)?(?:90(?:(?:\.0{1,13})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,13})?))$/', $latitude);
   }
@@ -47,11 +42,6 @@ class CoordinateValidator {
 
     // Check whether value passed is numeric.
     if (!is_numeric($longitude)) {
-      return FALSE;
-    }
-
-    // Check whether value passed is float.
-    if (!is_float($longitude)) {
       return FALSE;
     }
 

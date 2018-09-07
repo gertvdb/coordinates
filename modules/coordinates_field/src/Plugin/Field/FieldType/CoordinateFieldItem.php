@@ -94,30 +94,20 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    */
   public function getValue() {
     parent::getValue();
-    try {
-      if ($this->getLatitude() && $this->getLongitude()) {
-        $values = new Coordinate($this->getLatitude(), $this->getLongitude());
-        $this->values = $values->toArray();
-      }
-    }
-    catch (\Exception $e) {
-      $this->values = NULL;
-    }
+    $this->values = $this->toCoordinate();
     return $this->values;
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
    */
-  public function setValue($values) {
+  public function setValue($values, $notify = TRUE) {
     // Allow callers to pass a CoordinateInterface object
     // as the field item value.
     if ($values instanceof CoordinateInterface) {
-      $coordinate = $values;
-      $values = [
-        'latitude' => $coordinate->getLatitude(),
-        'longitude' => $coordinate->getLongitude(),
-      ];
+      $values = $values->toArray();
     }
 
     parent::setValue($values);
@@ -141,6 +131,23 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    */
   public function getLongitude() {
     return $this->longitude ? (float) $this->longitude : NULL;
+  }
+
+  /**
+   * Get the coordinate object.
+   */
+  public function toCoordinate() {
+    $coordinate = NULL;
+    try {
+      if ($this->getLatitude() && $this->getLongitude()) {
+        $coordinate = new Coordinate($this->getLatitude(), $this->getLongitude());
+      }
+    }
+    catch (\Exception $e) {
+      $coordinate = NULL;
+    }
+
+    return $coordinate;
   }
 
 }

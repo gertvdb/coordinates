@@ -27,4 +27,12 @@ interface CoordinateFieldItemInterface extends FieldItemInterface {
    */
   public function getLongitude();
 
+  /**
+   * Get the coordinate object.
+   *
+   * @return \Drupal\coordinates\Coordinate|null
+   *   A Coordinate object.
+   */
+  public function toCoordinate();
+
 }

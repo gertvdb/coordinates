@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\coordinates\Render\Element;
+namespace Drupal\coordinates_field\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
@@ -43,6 +43,7 @@ class CoordinateField extends FormElement {
       '#element_validate' => [
         [$class, 'validateCoordinate'],
       ],
+      '#theme' => 'coordinate',
       '#theme_wrappers' => ['form_element'],
     ];
   }
@@ -60,6 +61,14 @@ class CoordinateField extends FormElement {
 
     $latValue = isset($value['latitude']) ? $value['latitude'] : NULL;
     $lonValue = isset($value['longitude']) ? $value['longitude'] : NULL;
+
+    if ($latValue && !$lonValue) {
+      $formState->setError($element['longitude'], t('When latitude value is provided, you also need to provide a longitude value.'));
+    }
+
+    if ($lonValue && !$latValue) {
+      $formState->setError($element['latitude'], t('When longitude value is provided, you also need to provide a latitude value.'));
+    }
 
     if ($latValue && !CoordinateValidator::isValidLatitude($latValue, FALSE)) {
       $formState->setError($element['latitude'], t('The latitude is invalid.'));

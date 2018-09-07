@@ -45,15 +45,15 @@ class CoordinateComputed extends TypedData {
 
     /** @var \Drupal\coordinates_field\Plugin\Field\FieldType\CoordinateFieldItemInterface $coordinateField */
     $coordinateField = $this->getParent();
-    $coordinateField->getValue();
-
-    return $coordinateField->getValue();
+    return $coordinateField->toCoordinate();
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
    */
-  public function setValue($value) {
+  public function setValue($value, $notify = TRUE) {
     $this->coordinate = $value;
     // Notify the parent of any changes.
     if (isset($this->parent)) {

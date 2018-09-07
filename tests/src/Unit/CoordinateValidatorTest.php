@@ -21,6 +21,8 @@ class CoordinateValidatorTest extends UnitTestCase {
     $this->assertEquals(TRUE, CoordinateValidator::isValidLatitude(-2.148888888));
     $this->assertEquals(TRUE, CoordinateValidator::isValidLatitude(-45.90900034));
     $this->assertEquals(TRUE, CoordinateValidator::isValidLatitude(67.912238494404440));
+    $this->assertEquals(TRUE, CoordinateValidator::isValidLatitude(0));
+    $this->assertEquals(TRUE, CoordinateValidator::isValidLatitude(19));
   }
 
   /**
@@ -28,9 +30,8 @@ class CoordinateValidatorTest extends UnitTestCase {
    */
   public function testInvalidLatitude() {
     $this->assertEquals(FALSE, CoordinateValidator::isValidLatitude('INVALID'));
-    $this->assertEquals(FALSE, CoordinateValidator::isValidLatitude(9));
     $this->assertEquals(FALSE, CoordinateValidator::isValidLatitude(-190000.369699));
-    $this->assertEquals(FALSE, CoordinateValidator::isValidLatitude(0));
+    $this->assertEquals(FALSE, CoordinateValidator::isValidLatitude(23400000));
   }
 
   /**
@@ -42,6 +43,8 @@ class CoordinateValidatorTest extends UnitTestCase {
     $this->assertEquals(TRUE, CoordinateValidator::isValidLongitude(-2.148888888));
     $this->assertEquals(TRUE, CoordinateValidator::isValidLongitude(-45.90900034));
     $this->assertEquals(TRUE, CoordinateValidator::isValidLongitude(67.912238494404440));
+    $this->assertEquals(TRUE, CoordinateValidator::isValidLongitude(0));
+    $this->assertEquals(TRUE, CoordinateValidator::isValidLongitude(19));
   }
 
   /**
@@ -49,9 +52,9 @@ class CoordinateValidatorTest extends UnitTestCase {
    */
   public function testInvalidLongitude() {
     $this->assertEquals(FALSE, CoordinateValidator::isValidLongitude('INVALID'));
-    $this->assertEquals(FALSE, CoordinateValidator::isValidLongitude(9));
     $this->assertEquals(FALSE, CoordinateValidator::isValidLongitude(-190000.369699));
-    $this->assertEquals(FALSE, CoordinateValidator::isValidLongitude(0));
+    $this->assertEquals(FALSE, CoordinateValidator::isValidLongitude(23400000));
+
   }
 
 }

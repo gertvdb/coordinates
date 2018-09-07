@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * The coordinates field module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function coordinates_field_theme() {
+  return [
+    'coordinate' => [
+      'render element' => 'element',
+    ],
+    'latitude' => [
+      'render element' => 'element',
+    ],
+    'longitude' => [
+      'render element' => 'element',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for coordinate templates.
+ *
+ * Default template: coordinate.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #children, #attributes.
+ */
+function template_preprocess_coordinate(array &$variables) {
+  $element = $variables['element'];
+  $variables['attributes'] = [];
+  if (isset($element['#id'])) {
+    $variables['attributes']['id'] = $element['#id'];
+  }
+  if (isset($element['#attributes']['title'])) {
+    $variables['attributes']['title'] = $element['#attributes']['title'];
+  }
+
+  $variables['latitude'] = $element['latitude'];
+  $variables['longitude'] = $element['longitude'];
+}
+
+/**
+ * Prepares variables for latitude templates.
+ *
+ * Default template: latitude.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #attributes.
+ */
+function template_preprocess_latitude(array &$variables) {
+  $element = $variables['element'];
+  // Remove name attribute if empty, for W3C compliance.
+  if (isset($variables['attributes']['name']) && empty((string) $variables['attributes']['name'])) {
+    unset($variables['attributes']['name']);
+  }
+  $variables['children'] = $element['#children'];
+}
+
+/**
+ * Prepares variables for longitude templates.
+ *
+ * Default template: longitude.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #attributes.
+ */
+function template_preprocess_longitude(array &$variables) {
+  $element = $variables['element'];
+  // Remove name attribute if empty, for W3C compliance.
+  if (isset($variables['attributes']['name']) && empty((string) $variables['attributes']['name'])) {
+    unset($variables['attributes']['name']);
+  }
+  $variables['children'] = $element['#children'];
+}
