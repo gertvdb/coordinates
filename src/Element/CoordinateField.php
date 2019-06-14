@@ -31,7 +31,7 @@ use Drupal\coordinates\Utility\CoordinateValidator;
 class CoordinateField extends FormElement {
 
   const PRESERVED_KEYS = [
-    '#type'
+    '#type',
   ];
 
   /**
@@ -58,16 +58,16 @@ class CoordinateField extends FormElement {
    * Note that #maxlength and #required is validated by _
    * form_validate() already.
    *
-   * @param $element
-   *   The element
+   * @param array $element
+   *   The element.
    * @param \Drupal\Core\Form\FormStateInterface $formState
-   *   The form state
-   * @param $completeForm
-   *   The form
+   *   The form state.
+   * @param array $completeForm
+   *   The form.
    *
    * @SuppressWarnings(PHPMD)
    */
-  public static function validateCoordinate(&$element, FormStateInterface $formState, &$completeForm) {
+  public static function validateCoordinate(array &$element, FormStateInterface $formState, array &$completeForm) {
     $value = $element['#value'];
 
     $latValue = isset($value['latitude']) ? $value['latitude'] : NULL;
@@ -93,19 +93,19 @@ class CoordinateField extends FormElement {
   /**
    * Processes a coordinate form element.
    *
-   * @param $element
-   *   The element
+   * @param array $element
+   *   The element.
    * @param \Drupal\Core\Form\FormStateInterface $formState
-   *   The form state
-   * @param $completeForm
-   *   The form
+   *   The form state.
+   * @param array $completeForm
+   *   The form.
    *
    * @return array
    *   The processed element
    *
    * @SuppressWarnings(PHPMD)
    */
-  public static function processCoordinate(&$element, FormStateInterface $formState, &$completeForm) {
+  public static function processCoordinate(array &$element, FormStateInterface $formState, array &$completeForm) {
     $element['#tree'] = TRUE;
 
     $element['latitude'] = [
@@ -127,7 +127,7 @@ class CoordinateField extends FormElement {
     if (isset($element['#latitude'])) {
 
       // Remove preserved keys from override to prevent errors.
-      $element['#latitude'] = array_filter($element['#latitude'], function($key) use ($preservedKeys){
+      $element['#latitude'] = array_filter($element['#latitude'], function ($key) use ($preservedKeys) {
         return !in_array($key, $preservedKeys);
       }, ARRAY_FILTER_USE_KEY);
 
@@ -139,7 +139,7 @@ class CoordinateField extends FormElement {
     if (isset($element['#longitude'])) {
 
       // Remove preserved keys from override to prevent errors.
-      $element['#longitude'] = array_filter($element['#longitude'], function($key) use ($preservedKeys){
+      $element['#longitude'] = array_filter($element['#longitude'], function ($key) use ($preservedKeys) {
         return !in_array($key, $preservedKeys);
       }, ARRAY_FILTER_USE_KEY);
 

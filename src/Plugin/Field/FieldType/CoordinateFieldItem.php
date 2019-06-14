@@ -90,13 +90,13 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
 
     // Enforce that the computed coordinate is recalculated.
     if (in_array($propertyName, ['latitude', 'longitude'])) {
-
-        try {
-            $this->set('value', NULL);
-        }
-        catch (\Exception $exception) {
-            // In theory this will never throw an exception since we define the property.
-        }
+      try {
+        $this->set('value', NULL);
+      }
+      catch (\Exception $exception) {
+        // In theory this will never throw an exception since we define
+        // the property.
+      }
     }
 
     parent::onChange($propertyName, $notify);
@@ -136,17 +136,17 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
 
     try {
 
-        /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
-        $latitudeValue = $this->get('latitude');
-        if (!$latitudeValue instanceof PrimitiveBase) {
-            return NULL;
-        }
+      /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
+      $latitudeValue = $this->get('latitude');
+      if (!$latitudeValue instanceof PrimitiveBase) {
+        return NULL;
+      }
 
-        return $latitudeValue->getCastedValue();
+      return $latitudeValue->getCastedValue();
 
     }
     catch (\Exception $exception) {
-        return NULL;
+      return NULL;
     }
   }
 
@@ -179,8 +179,6 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    * Get the coordinate object.
    */
   public function toCoordinate() {
-    $coordinate = NULL;
-
     try {
 
       if (!$this->getLatitude() || !$this->getLongitude()) {
