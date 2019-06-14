@@ -6,7 +6,6 @@ use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\TypedData\TypedData;
 use Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface;
-use Drupal\coordinates\CoordinateInterface;
 
 /**
  * A computed property for coordinate of coordinate field items.
