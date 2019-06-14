@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\coordinates_field\Plugin\Field\FieldType;
+namespace Drupal\coordinates\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemListInterface;
 
 /**
  * Interface CoordinateFieldItemListInterface.
  *
- * @package Drupal\coordinates_field\Plugin\Field\FieldType
+ * @package Drupal\coordinates\Plugin\Field\FieldType
  */
 interface CoordinateFieldItemListInterface extends FieldItemListInterface {
 

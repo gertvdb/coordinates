@@ -1,7 +1,9 @@
 <?php
 
-namespace Drupal\coordinates_field\Plugin\Field\FieldFormatter;
+namespace Drupal\coordinates\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Field\Annotation\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\coordinates\Formatter\CoordinateFormatter;
@@ -31,7 +33,7 @@ class CoordinateFieldFormatter extends FormatterBase {
         /** @var \Drupal\coordinates\CoordinateInterface $coordinate */
         $coordinate = $item->value;
         $coordinateFormatter = new CoordinateFormatter();
-        $elements[$delta] = $coordinateFormatter->format($coordinate, '%lat, %lng');
+        $elements[$delta] = ['#markup' => $coordinateFormatter->format($coordinate, '%lat, %lng')];
       }
     }
 

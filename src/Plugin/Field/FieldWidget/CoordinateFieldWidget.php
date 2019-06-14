@@ -1,8 +1,10 @@
 <?php
 
-namespace Drupal\coordinates_field\Plugin\Field\FieldWidget;
+namespace Drupal\coordinates\Plugin\Field\FieldWidget;
 
 use Drupal\coordinates\CoordinateInterface;
+use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Field\Annotation\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Field\WidgetBase;

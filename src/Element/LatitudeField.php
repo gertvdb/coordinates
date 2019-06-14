@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\coordinates_field\Element;
+namespace Drupal\coordinates\Element;
 
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;

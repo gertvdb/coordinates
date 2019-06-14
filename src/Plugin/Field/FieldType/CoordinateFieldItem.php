@@ -1,12 +1,15 @@
 <?php
 
-namespace Drupal\coordinates_field\Plugin\Field\FieldType;
+namespace Drupal\coordinates\Plugin\Field\FieldType;
 
+use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Field\Annotation\FieldType;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\coordinates\Coordinate;
 use Drupal\coordinates\CoordinateInterface;
+use Drupal\Core\TypedData\PrimitiveBase;
 
 /**
  * Plugin implementation of the 'coordinate' field type.
@@ -17,7 +20,7 @@ use Drupal\coordinates\CoordinateInterface;
  *   description = @Translation("Create and store coordinate values."),
  *   default_widget = "coordinate_default",
  *   default_formatter = "coordinate_default",
- *   list_class = "\Drupal\coordinates_field\Plugin\Field\FieldType\CoordinateFieldItemList",
+ *   list_class = "\Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemList",
  * )
  */
 class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemInterface {
@@ -30,7 +33,7 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
       ->setLabel(t('Computed coordinate'))
       ->setDescription(t('The computed Coordinate object.'))
       ->setComputed(TRUE)
-      ->setClass('\Drupal\coordinates_field\CoordinateComputed');
+      ->setClass('\Drupal\coordinates\CoordinateComputed');
 
     $properties['latitude'] = DataDefinition::create('float')
       ->setLabel(t('Latitude'))
@@ -80,13 +83,23 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
 
   /**
    * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
    */
-  public function onChange($propertyName) {
+  public function onChange($propertyName, $notify = TRUE) {
+
     // Enforce that the computed coordinate is recalculated.
     if (in_array($propertyName, ['latitude', 'longitude'])) {
-      $this->value = NULL;
+
+        try {
+            $this->set('value', NULL);
+        }
+        catch (\Exception $exception) {
+            // In theory this will never throw an exception since we define the property.
+        }
     }
-    parent::onChange($propertyName);
+
+    parent::onChange($propertyName, $notify);
   }
 
   /**
@@ -120,7 +133,21 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    *   A latitude.
    */
   public function getLatitude() {
-    return $this->latitude ? (float) $this->latitude : NULL;
+
+    try {
+
+        /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
+        $latitudeValue = $this->get('latitude');
+        if (!$latitudeValue instanceof PrimitiveBase) {
+            return NULL;
+        }
+
+        return $latitudeValue->getCastedValue();
+
+    }
+    catch (\Exception $exception) {
+        return NULL;
+    }
   }
 
   /**
@@ -130,7 +157,22 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    *   A longitude.
    */
   public function getLongitude() {
-    return $this->longitude ? (float) $this->longitude : NULL;
+
+    try {
+
+      /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
+      $longitudeValue = $this->get('longitude');
+      if (!$longitudeValue instanceof PrimitiveBase) {
+        return NULL;
+      }
+
+      return $longitudeValue->getCastedValue();
+
+    }
+    catch (\Exception $exception) {
+      return NULL;
+    }
+
   }
 
   /**
@@ -138,16 +180,19 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    */
   public function toCoordinate() {
     $coordinate = NULL;
+
     try {
-      if ($this->getLatitude() && $this->getLongitude()) {
-        $coordinate = new Coordinate($this->getLatitude(), $this->getLongitude());
+
+      if (!$this->getLatitude() || !$this->getLongitude()) {
+        return NULL;
       }
+
+      return new Coordinate($this->getLatitude(), $this->getLongitude());
     }
     catch (\Exception $e) {
-      $coordinate = NULL;
+      return NULL;
     }
 
-    return $coordinate;
   }
 
 }

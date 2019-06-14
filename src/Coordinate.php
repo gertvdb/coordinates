@@ -9,21 +9,21 @@ use Drupal\coordinates\Utility\CoordinateValidator;
  *
  * A coordinate object to store coordinates.
  */
-class Coordinate implements CoordinateInterface {
+final class Coordinate implements CoordinateInterface {
 
   /**
    * The latitude.
    *
    * @var float
    */
-  protected $latitude;
+  private $latitude;
 
   /**
    * The longitude.
    *
    * @var float
    */
-  protected $longitude;
+  private $longitude;
 
   /**
    * Constructor.

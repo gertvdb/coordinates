@@ -2,12 +2,10 @@
 
 namespace Drupal\coordinates;
 
-use Drupal\coordinates\CoordinateInterface;
-
 /**
  * CoordinateCollection.
  */
-class CoordinateCollection implements CoordinateCollectionInterface {
+final class CoordinateCollection implements CoordinateCollectionInterface {
 
   /**
    * The coordinates.
@@ -65,6 +63,12 @@ class CoordinateCollection implements CoordinateCollectionInterface {
 
   /**
    * Filter out all items that aren't valid coordinates.
+   *
+   * @param array $coordinates
+   *   A array of coordinates.
+   *
+   * @return array
+   *   A filtered array of coordinates.
    */
   protected function prepareCollection(array $coordinates = []) {
     $preparedCollection = [];

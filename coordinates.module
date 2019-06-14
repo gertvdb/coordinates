@@ -2,13 +2,13 @@
 
 /**
  * @file
- * The coordinates field module.
+ * The coordinates module.
  */
 
 /**
  * Implements hook_theme().
  */
-function coordinates_field_theme() {
+function coordinates_theme() {
   return [
     'coordinate' => [
       'render element' => 'element',

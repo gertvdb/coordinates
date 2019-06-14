@@ -45,7 +45,7 @@ class CoordinateValidator {
       return FALSE;
     }
 
-    // Check whether value passed is valid latitude.
+    // Check whether value passed is valid longitude.
     return preg_match('/^(\+|-)?(?:180(?:(?:\.0{1,13})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,13})?))$/', $longitude);
   }
 

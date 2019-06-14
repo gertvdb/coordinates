@@ -1,9 +1,8 @@
 <?php
 
-namespace Drupal\coordinates_field\Plugin\Field\FieldType;
+namespace Drupal\coordinates\Plugin\Field\FieldType;
 
 use Drupal\coordinates\CoordinateCollection;
-use Drupal\coordinates_field\Plugin\Field\FieldType\CoordinateFieldItemListInterface;
 use Drupal\Core\Field\FieldItemList;
 
 /**

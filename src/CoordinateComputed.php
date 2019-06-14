@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\coordinates_field;
+namespace Drupal\coordinates;
 
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\TypedData\TypedData;
-use Drupal\coordinates_field\Plugin\Field\FieldType\CoordinateFieldItemInterface;
+use Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface;
 use Drupal\coordinates\CoordinateInterface;
 
 /**
@@ -43,7 +43,7 @@ class CoordinateComputed extends TypedData {
       return $this->coordinate;
     }
 
-    /** @var \Drupal\coordinates_field\Plugin\Field\FieldType\CoordinateFieldItemInterface $coordinateField */
+    /** @var \Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface $coordinateField */
     $coordinateField = $this->getParent();
     return $coordinateField->toCoordinate();
   }

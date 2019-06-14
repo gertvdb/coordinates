@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\coordinates_field\Element;
+namespace Drupal\coordinates\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
@@ -30,6 +30,10 @@ use Drupal\coordinates\Utility\CoordinateValidator;
  */
 class CoordinateField extends FormElement {
 
+  const PRESERVED_KEYS = [
+    '#type'
+  ];
+
   /**
    * {@inheritdoc}
    */
@@ -54,6 +58,13 @@ class CoordinateField extends FormElement {
    * Note that #maxlength and #required is validated by _
    * form_validate() already.
    *
+   * @param $element
+   *   The element
+   * @param \Drupal\Core\Form\FormStateInterface $formState
+   *   The form state
+   * @param $completeForm
+   *   The form
+   *
    * @SuppressWarnings(PHPMD)
    */
   public static function validateCoordinate(&$element, FormStateInterface $formState, &$completeForm) {
@@ -70,17 +81,27 @@ class CoordinateField extends FormElement {
       $formState->setError($element['latitude'], t('When longitude value is provided, you also need to provide a latitude value.'));
     }
 
-    if ($latValue && !CoordinateValidator::isValidLatitude($latValue, FALSE)) {
+    if ($latValue && !CoordinateValidator::isValidLatitude($latValue)) {
       $formState->setError($element['latitude'], t('The latitude is invalid.'));
     }
 
-    if ($lonValue && !CoordinateValidator::isValidLongitude($lonValue, FALSE)) {
+    if ($lonValue && !CoordinateValidator::isValidLongitude($lonValue)) {
       $formState->setError($element['longitude'], t('The longitude is invalid.'));
     }
   }
 
   /**
    * Processes a coordinate form element.
+   *
+   * @param $element
+   *   The element
+   * @param \Drupal\Core\Form\FormStateInterface $formState
+   *   The form state
+   * @param $completeForm
+   *   The form
+   *
+   * @return array
+   *   The processed element
    *
    * @SuppressWarnings(PHPMD)
    */
@@ -99,13 +120,30 @@ class CoordinateField extends FormElement {
       '#default_value' => isset($element['#default_value']['longitude']) ? $element['#default_value']['longitude'] : NULL,
     ];
 
+    // Define keys we don't want the user to be able to override.
+    $preservedKeys = self::PRESERVED_KEYS;
+
     // Override child element.
     if (isset($element['#latitude'])) {
+
+      // Remove preserved keys from override to prevent errors.
+      $element['#latitude'] = array_filter($element['#latitude'], function($key) use ($preservedKeys){
+        return !in_array($key, $preservedKeys);
+      }, ARRAY_FILTER_USE_KEY);
+
+      // Set the new latitude element.
       $element['latitude'] = array_merge($element['latitude'], $element['#latitude']);
     }
 
     // Override child element.
     if (isset($element['#longitude'])) {
+
+      // Remove preserved keys from override to prevent errors.
+      $element['#longitude'] = array_filter($element['#longitude'], function($key) use ($preservedKeys){
+        return !in_array($key, $preservedKeys);
+      }, ARRAY_FILTER_USE_KEY);
+
+      // Set the new longitude element.
       $element['longitude'] = array_merge($element['longitude'], $element['#longitude']);
     }
 
