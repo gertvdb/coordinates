@@ -1,5 +1,8 @@
 # coordinates #
 
+[![Build Status](https://travis-ci.org/gertvdb/coordinates.svg?branch=8.x-1.x)](https://travis-ci.org/gertvdb/coordinates)
+[![Coverage Status](https://coveralls.io/repos/github/gertvdb/coordinates/badge.svg?branch=8.x-1.x)](https://coveralls.io/github/gertvdb/coordinates?branch=8.x-1.x)
+
 Provide a standard way to store coordinates and coordinate collections.
 
 # Usage #

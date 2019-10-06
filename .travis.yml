@@ -23,7 +23,6 @@ script:
   - vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
   - vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
   - vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
-  - vendor/bin/phpunit --coverage-clover ./coverage/clover.xml
 
 after_script:
-  - php vendor/bin/php-coveralls -v
+  - travis_retry php vendor/bin/php-coveralls -v
