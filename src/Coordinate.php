@@ -3,6 +3,7 @@
 namespace Drupal\coordinates;
 
 use Drupal\coordinates\Utility\CoordinateValidator;
+use InvalidArgumentException;
 
 /**
  * Coordinate.
@@ -78,7 +79,7 @@ final class Coordinate implements CoordinateInterface {
   private function setLongitude($longitude) {
 
     if (!CoordinateValidator::isValidLongitude($longitude)) {
-      throw new \InvalidArgumentException('The provide longitude is invalid.');
+      throw new InvalidArgumentException('The provide longitude is invalid.');
     }
 
     $this->longitude = $longitude;
@@ -93,7 +94,7 @@ final class Coordinate implements CoordinateInterface {
   private function setLatitude($latitude) {
 
     if (!CoordinateValidator::isValidLatitude($latitude)) {
-      throw new \InvalidArgumentException('The provide latitude is invalid.');
+      throw new InvalidArgumentException('The provide latitude is invalid.');
     }
 
     $this->latitude = $latitude;

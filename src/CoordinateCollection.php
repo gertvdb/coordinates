@@ -2,6 +2,8 @@
 
 namespace Drupal\coordinates;
 
+use ArrayIterator;
+
 /**
  * CoordinateCollection.
  */
@@ -58,7 +60,7 @@ final class CoordinateCollection implements CoordinateCollectionInterface {
    * {@inheritdoc}
    */
   public function getIterator() {
-    return new \ArrayIterator($this->coordinates);
+    return new ArrayIterator($this->coordinates);
   }
 
   /**

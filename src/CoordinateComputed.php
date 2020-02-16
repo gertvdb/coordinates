@@ -6,6 +6,7 @@ use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\TypedData\TypedData;
 use Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface;
+use InvalidArgumentException;
 
 /**
  * A computed property for coordinate of coordinate field items.
@@ -30,7 +31,7 @@ class CoordinateComputed extends TypedData {
     parent::__construct($definition, $name, $parent);
 
     if (!$this->getParent() instanceof CoordinateFieldItemInterface) {
-      throw new \InvalidArgumentException("The coordinate computer will only work on an implementation of the CoordinateFieldItemInterface");
+      throw new InvalidArgumentException("The coordinate computer will only work on an implementation of the CoordinateFieldItemInterface");
     }
   }
 
