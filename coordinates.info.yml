@@ -1,5 +1,5 @@
 name: Coordinates
 description: Provide a standard way to store coordinates
-package: Models
+package: Field types
 type: module
 core: 8.x

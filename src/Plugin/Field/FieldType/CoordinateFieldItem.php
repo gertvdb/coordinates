@@ -43,6 +43,19 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
       ->setLabel(t('Longitude'))
       ->setRequired(TRUE);
 
+    // Extra fields for proximity queries.
+    $properties['latitude_sin'] = DataDefinition::create('float')
+      ->setLabel(t('Latitude sine'))
+      ->setComputed(TRUE);
+
+    $properties['latitude_cos'] = DataDefinition::create('float')
+      ->setLabel(t('Latitude cosine'))
+      ->setComputed(TRUE);
+
+    $properties['longitude_rad'] = DataDefinition::create('float')
+      ->setLabel(t('Longitude radian'))
+      ->setComputed(TRUE);
+
     return $properties;
   }
 
@@ -63,6 +76,24 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
           'type' => 'float',
           'size' => 'big',
           'not null' => FALSE,
+        ],
+        'latitude_sin' => [
+          'description' => 'Stores the sine of latitude',
+          'type' => 'float',
+          'size' => 'big',
+          'not null' => TRUE,
+        ],
+        'latitude_cos' => [
+          'description' => 'Stores the cosine of latitude',
+          'type' => 'float',
+          'size' => 'big',
+          'not null' => TRUE,
+        ],
+        'longitude_rad' => [
+          'description' => 'Stores the radian longitude',
+          'type' => 'float',
+          'size' => 'big',
+          'not null' => TRUE,
         ],
       ],
       'indexes' => [
@@ -100,6 +131,10 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
     }
 
     parent::onChange($propertyName, $notify);
+
+    if (!$this->isEmpty()) {
+      $this->recalculateProximityFields();
+    }
   }
 
   /**
@@ -124,6 +159,22 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
     }
 
     parent::setValue($values);
+
+    if (!$this->isEmpty()) {
+      $this->recalculateProximityFields();
+    }
+  }
+
+  /**
+   * Recalculate proximity fields.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @throws \Drupal\Core\TypedData\Exception\ReadOnlyException
+   */
+  private function recalculateProximityFields() {
+    $this->get('latitude_sin')->setValue(sin(deg2rad(trim($this->getLatitude()))), FALSE);
+    $this->get('latitude_cos')->setValue(cos(deg2rad(trim($this->getLatitude()))), FALSE);
+    $this->get('longitude_rad')->setValue(deg2rad(trim($this->getLongitude())), FALSE);
   }
 
   /**
