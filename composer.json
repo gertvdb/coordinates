@@ -46,14 +46,14 @@
     }
   },
   "config": {
-    "platform": {
-      "php": "7.0.8"
-    },
     "sort-packages": true
   },
   "extra": {
     "installer-paths": {
       "vendor/drupal/{$name}": ["drupal/core"]
     }
+  },
+  "require": {
+    "gertvdb/distance": "^8.1"
   }
 }

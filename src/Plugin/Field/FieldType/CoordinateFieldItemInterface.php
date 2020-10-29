@@ -2,6 +2,7 @@
 
 namespace Drupal\coordinates\Plugin\Field\FieldType;
 
+use Drupal\coordinates\Coordinate;
 use Drupal\Core\Field\FieldItemInterface;
 
 /**
@@ -30,7 +31,7 @@ interface CoordinateFieldItemInterface extends FieldItemInterface {
   /**
    * Get the coordinate object.
    *
-   * @return \Drupal\coordinates\Coordinate|null
+   * @return Coordinate|null
    *   A Coordinate object.
    */
   public function toCoordinate();

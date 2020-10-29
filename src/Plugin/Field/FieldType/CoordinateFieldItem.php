@@ -2,13 +2,14 @@
 
 namespace Drupal\coordinates\Plugin\Field\FieldType;
 
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Field\Annotation\FieldType;
+use Drupal\coordinates\Service\ProximityCalculationService;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\coordinates\Coordinate;
 use Drupal\coordinates\CoordinateInterface;
+use Drupal\Core\TypedData\Exception\MissingDataException;
+use Drupal\Core\TypedData\Exception\ReadOnlyException;
 use Drupal\Core\TypedData\PrimitiveBase;
 
 /**
@@ -24,6 +25,21 @@ use Drupal\Core\TypedData\PrimitiveBase;
  * )
  */
 class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemInterface {
+
+  /**
+   * Get the proximity calculation service.
+   *
+   * Since at this point Dependency Injection is not provided for
+   * Typed Data (https://www.drupal.org/project/drupal/issues/2914419),
+   * we use the Drupal service container in a seperate function so this can be
+   * reworked later on when issue is resolved.
+   *
+   * @return ProximityCalculationService
+   *   The proximity calculation service.
+   */
+  protected function getProximityCalculationSerice() {
+    return \Drupal::service('coordinates.proximity_calculations');
+  }
 
   /**
    * {@inheritdoc}
@@ -133,7 +149,11 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
     parent::onChange($propertyName, $notify);
 
     if (!$this->isEmpty()) {
-      $this->recalculateProximityFields();
+        try {
+            $this->recalculateProximityFields();
+        } catch (MissingDataException $e) {
+        } catch (ReadOnlyException $e) {
+        }
     }
   }
 
@@ -146,11 +166,12 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
     return $this->values;
   }
 
-  /**
-   * {@inheritdoc}
-   *
-   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-   */
+    /**
+     * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @throws MissingDataException
+     */
   public function setValue($values, $notify = TRUE) {
     // Allow callers to pass a CoordinateInterface object
     // as the field item value.
@@ -168,13 +189,15 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
   /**
    * Recalculate proximity fields.
    *
-   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
-   * @throws \Drupal\Core\TypedData\Exception\ReadOnlyException
+   * @throws MissingDataException
+   * @throws ReadOnlyException
    */
   private function recalculateProximityFields() {
-    $this->get('latitude_sin')->setValue(sin(deg2rad(trim($this->getLatitude()))), FALSE);
-    $this->get('latitude_cos')->setValue(cos(deg2rad(trim($this->getLatitude()))), FALSE);
-    $this->get('longitude_rad')->setValue(deg2rad(trim($this->getLongitude())), FALSE);
+    $service = $this->getProximityCalculationSerice();
+
+    $this->get('latitude_sin')->setValue($service->calcLatitudeSinus($this->getLatitude()), FALSE);
+    $this->get('latitude_cos')->setValue($service->calcLatitudeCosinus($this->getLatitude()), FALSE);
+    $this->get('longitude_rad')->setValue($service->calcLongitudeRadius($this->getLongitude()), FALSE);
   }
 
   /**
@@ -187,7 +210,7 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
 
     try {
 
-      /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
+      /** @var PrimitiveBase $latitudeValue */
       $latitudeValue = $this->get('latitude');
       if (!$latitudeValue instanceof PrimitiveBase) {
         return NULL;
@@ -211,7 +234,7 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
 
     try {
 
-      /** @var \Drupal\Core\TypedData\PrimitiveBase $latitudeValue */
+      /** @var PrimitiveBase $latitudeValue */
       $longitudeValue = $this->get('longitude');
       if (!$longitudeValue instanceof PrimitiveBase) {
         return NULL;

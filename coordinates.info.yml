@@ -2,4 +2,4 @@ name: Coordinates
 description: Provide a standard way to store coordinates
 package: Field types
 type: module
-core: 8.x
+core_version_requirement: ^8.8 || ^9

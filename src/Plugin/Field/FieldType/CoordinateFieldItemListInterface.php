@@ -2,6 +2,7 @@
 
 namespace Drupal\coordinates\Plugin\Field\FieldType;
 
+use Drupal\coordinates\CoordinateCollectionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 
 /**
@@ -14,7 +15,7 @@ interface CoordinateFieldItemListInterface extends FieldItemListInterface {
   /**
    * Gets a coordinate collection from field.
    *
-   * @return \Drupal\coordinates\CoordinateCollectionInterface[]
+   * @return CoordinateCollectionInterface[]
    *   A coordinate collection object.
    */
   public function coordinateCollection();

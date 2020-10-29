@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8fc5439f3e32a09b595eca423206c44",
-    "packages": [],
+    "content-hash": "b429866ff0d72c5aac74025898ce5270",
+    "packages": [
+        {
+            "name": "gertvdb/distance",
+            "version": "8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gertvdb/distance.git",
+                "reference": "c22c48b74e6ace99e107040e0c8a435a4ea7f4db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gertvdb/distance/zipball/c22c48b74e6ace99e107040e0c8a435a4ea7f4db",
+                "reference": "c22c48b74e6ace99e107040e0c8a435a4ea7f4db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert van den Buijs",
+                    "email": "gertvandenbuijs@hotmail.com"
+                }
+            ],
+            "description": "Provide a standard way to store distance",
+            "homepage": "https://github.com/gertvdb/distance",
+            "keywords": [
+                "distance"
+            ],
+            "time": "2020-03-16T18:55:13+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "asm89/stack-cors",
@@ -5360,8 +5396,5 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.0.8"
-    }
+    "platform-dev": []
 }

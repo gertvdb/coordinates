@@ -1,0 +1,4 @@
+services:
+  coordinates.proximity_calculations:
+    class: Drupal\coordinates\Service\ProximityCalculationService
+    arguments: []
