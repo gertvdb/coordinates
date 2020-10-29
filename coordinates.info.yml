@@ -3,3 +3,5 @@ description: Provide a standard way to store coordinates
 package: Field types
 type: module
 core_version_requirement: ^8.8 || ^9
+dependencies:
+  - distance:distance
