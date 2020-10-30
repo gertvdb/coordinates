@@ -5,7 +5,7 @@ namespace Drupal\coordinates;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\TypedData\TypedData;
-use Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface;
+use Drupal\coordinates\Plugin\Field\FieldType\LocationFieldItemInterface;
 use InvalidArgumentException;
 
 /**
@@ -30,7 +30,7 @@ class CoordinateComputed extends TypedData {
   public function __construct(DataDefinitionInterface $definition, $name = NULL, TypedDataInterface $parent = NULL) {
     parent::__construct($definition, $name, $parent);
 
-    if (!$this->getParent() instanceof CoordinateFieldItemInterface) {
+    if (!$this->getParent() instanceof LocationFieldItemInterface) {
       throw new InvalidArgumentException("The coordinate computer will only work on an implementation of the CoordinateFieldItemInterface");
     }
   }
@@ -43,7 +43,7 @@ class CoordinateComputed extends TypedData {
       return $this->coordinate;
     }
 
-    /** @var \Drupal\coordinates\Plugin\Field\FieldType\CoordinateFieldItemInterface $coordinateField */
+    /** @var \Drupal\coordinates\Plugin\Field\FieldType\LocationFieldItemInterface $coordinateField */
     $coordinateField = $this->getParent();
     return $coordinateField->toCoordinate();
   }

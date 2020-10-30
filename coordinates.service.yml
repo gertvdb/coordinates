@@ -1,4 +1,10 @@
 services:
+  # Services
   coordinates.proximity_calculations:
     class: Drupal\coordinates\Service\ProximityCalculationService
+    arguments: []
+
+  # Factories
+  coordinates.coordinates_factory:
+    class: Drupal\coordinates\Factory\CoordinatesFactory
     arguments: []

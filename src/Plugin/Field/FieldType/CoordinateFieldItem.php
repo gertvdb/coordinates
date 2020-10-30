@@ -2,6 +2,7 @@
 
 namespace Drupal\coordinates\Plugin\Field\FieldType;
 
+use Drupal\coordinate\Factory\CoordinateFactory;
 use Drupal\coordinates\Service\ProximityCalculationService;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
@@ -39,6 +40,21 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    */
   protected function getProximityCalculationSerice() {
     return \Drupal::service('coordinates.proximity_calculations');
+  }
+
+  /**
+   * Get the coordinate factory.
+   *
+   * Since at this point Dependency Injection is not provided for
+   * Typed Data (https://www.drupal.org/project/drupal/issues/2914419),
+   * we use the Drupal service container in a seperate function so this can be
+   * reworked later on when issue is resolved.
+   *
+   * @return CoordinateFactory
+   *   The coordinate factory.
+   */
+  protected function getCoordinateFactory() {
+    return \Drupal::service('coordinate.coordinate_factory');
   }
 
   /**
@@ -254,12 +270,8 @@ class CoordinateFieldItem extends FieldItemBase implements CoordinateFieldItemIn
    */
   public function toCoordinate() {
     try {
-
-      if (!$this->getLatitude() || !$this->getLongitude()) {
-        return NULL;
-      }
-
-      return new Coordinate($this->getLatitude(), $this->getLongitude());
+      $coordinateFactory = $this->getCoordinateFactory();
+      return $coordinateFactory->createCoordinate($this->getLatitude(), $this->getLongitude());
     }
     catch (\Exception $e) {
       return NULL;
